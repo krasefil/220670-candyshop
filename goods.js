@@ -35,18 +35,24 @@ function randomInteger(min, max) {
   return rand;
 }
 
-var catalogCards = document.querySelector('.catalog__cards').classList.remove('catalog__cards--load');
-var catalogLoad = document.querySelector('.catalog__load').classList.add('visually-hidden');
+document.querySelector('.catalog__cards').classList.remove('catalog__cards--load');
+document.querySelector('.catalog__load').classList.add('visually-hidden');
 
 var createCard = function () {
     var card = document.querySelector('#card').cloneNode(true).content;
     var img = card.querySelector('.card__img');
     img.src = 'img/cards/' + picture[randomInteger(0,picture.length - 1)] + '.jpg';
     card.querySelector('.catalog__card').classList.remove('card--in-stock');
+
+    var searchCard = card.querySelector('.catalog__card');
     var amount = randomInteger(0, 20);
-    amount > 5? card.querySelector('.catalog__card').classList.add('card--in-stock') :
-    amount < 5 && amount > 0 ? card.querySelector('.catalog__card').classList.add('card--little'):
-    card.querySelector('.catalog__card').classList.add('card--soon');
+    if (amount === 0) {
+      searchCard.classList.add('card--soon');
+    } else if (amount < 5) {
+        searchCard.classList.add('card--little');
+    } else  {
+        searchCard.classList.add('card--in-stock');
+    };
 
 
     var cardName =card.querySelector('.card__title').textContent = nameAssort[randomInteger(0,nameAssort.length - 1)];
@@ -57,11 +63,18 @@ var createCard = function () {
 
     card.querySelector('.stars__rating').classList.remove('stars__rating--five');
     var value = randomInteger(1, 5);
-    value === 1? card.querySelector('.stars__rating').classList.add('stars__rating--one') :
-    value === 2? card.querySelector('.stars__rating').classList.add('stars__rating--two') :
-    value === 3? card.querySelector('.stars__rating').classList.add('stars__rating--three') :
-    value === 4? card.querySelector('.stars__rating').classList.add('stars__rating--four') :
-    card.querySelector('.stars__rating').classList.add('stars__rating--five');
+    var searchStar = card.querySelector('.stars__rating');
+    if ( value === 1) {
+        searchStar.classList.add('stars__rating--one');
+    } else if (value === 2) {
+        searchStar.classList.add('stars__rating--two');
+    } else if (value === 3) {
+        searchStar.classList.add('stars__rating--three');
+    } else if (value === 4) {
+        searchStar.classList.add('stars__rating--four');
+    } else {
+        searchStar.classList.add('stars__rating--five');
+    };
 
     var number = Math.round(randomInteger(10, 900));
     card.querySelector('.star__count').textContent = '(' + number + ')';
@@ -78,10 +91,9 @@ var createCard = function () {
 };
 
 
-
+var cardList = document.querySelector('.catalog__cards');
 function cloneCard () {
   for (var i = 0; i < 26; i++) {
-  var cardList = document.querySelector('.catalog__cards');
   var cardItem = createCard();
   cardList.appendChild(cardItem);
   }
