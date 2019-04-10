@@ -177,7 +177,7 @@ var createCardOrder = function() {
   var price = randomInteger(110, 1500);
   cardOrder.querySelector(".card-order__main").innerHTML = price + ' <span class="card-order__price">₽</span>';
 
-  return card;
+  return cardOrder;
 };
 
 function cloneCardOrder() {
