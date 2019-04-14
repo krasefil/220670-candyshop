@@ -154,6 +154,7 @@ var createCard = function() {
 };
 
 var cardList = document.querySelector(".catalog__cards");
+
 function cloneCard() {
   for (var i = 0; i < 26; i++) {
     var cardItem = createCard();
@@ -163,8 +164,8 @@ function cloneCard() {
 
 cloneCard();
 
-var goodsCatalogCards = document.querySelector(".goods__cards").classList.remove("goods__cards--empty");
-var goodsCatalogLoad = document.querySelector(".goods__card-empty").classList.add("visually-hidden");
+//var goodsCatalogCards = document.querySelector(".goods__cards").classList.remove("goods__cards--empty");
+//var goodsCatalogLoad = document.querySelector(".goods__card-empty").classList.add("visually-hidden");
 
 var createCardOrder = function() {
   var cardOrder = document.querySelector("#card-order").cloneNode(true).content;
@@ -187,4 +188,21 @@ function cloneCardOrder() {
     cardList.appendChild(cardItem);
   }
 }
-cloneCardOrder();
+/* Добавлнеие товара в избранное*/
+var cardBtnFavorite = document.querySelectorAll('.card__btn-favorite');
+
+for (var i = 0; i < cardBtnFavorite.length; i++){
+  cardBtnFavorite[i].addEventListener('click', function(e) {
+    e.currentTarget.classList.toggle('card__btn-favorite--selected');
+  }); 
+};
+/* 1)При нажатии на card__btn у корзины убирается класс
+ .goods__card-empty и добавляется карточка    */
+
+ var cardBtn = document.querySelectorAll('.card__btn');
+
+for (var i = 0; i < cardBtn.length; i++) {
+  cardBtn[i].addEventListener('click', function(e) {
+    e.currentTarget.
+  })
+}
